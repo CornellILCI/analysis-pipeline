@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+  <a class="navbar-brand" href="#"><img src="/images/ILCI.png"/></a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">About</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Processes</a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">View All Loaded Processes</a>
+        <a class="dropdown-item" href="#">Start A Process</a>
+        <a class="dropdown-item" href="#">View Active Processes</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adminstration</a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Design A Process</a>
+        <a class="dropdown-item" href="#">Configure Processes</a>
+      </div>
+    </li>
+  </ul>
+  {{#account.logged_in}}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link">Logged in as: {{account.name}} on {{account.authority}}</a>
+    </li>
+  </ul>
+  {{/account.logged_in}}
+  {{^account.logged_in}}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" onclick="$('#loginModal').modal('show');">Login</a>
+    </li>
+   
+    <!-- 
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            Dropdown on Right</a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action with a lot of text inside of an item</a>
+      </div>
+    </li>
+     -->
+  </ul>
+  {{/account.logged_in}}
+</nav>
+{{^account.logged_in}}
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Select Service:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#loginauthority}}
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{{loginUrl}}'">Login with {{name}}</button>
+        {{/loginauthority}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{/account.logged_in}}
